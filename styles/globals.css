@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Koulen&family=Poppins:wght@200&display=swap');
+
+
+*{
+    font-family: 'Koulen', cursive;
+    
+}
+
+form{
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+}

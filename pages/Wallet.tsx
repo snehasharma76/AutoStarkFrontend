@@ -24,7 +24,7 @@ function Wallet() {
   ];
 
   const headerLogoSrc =
-    "https://blogger.googleusercontent.com/img/a/AVvXsEhqJsWJhTV71WP49YDJZbVeh_I-btNsep9PfcNylfiPtiVzndyx6ofZlXSpWTFwvAbOklVQWanUJpYcLE6FFLwdXYYdO2E4n4ybolmQhBTJkwpBbjemUplbpKa4sWP1Wxo9WQdtCnEnpWDM0Fa3_ZtAC_FvWh7acbJ0FBmCHG10z9wSMWqzi40GKD3luYE";
+    "https://blogger.googleusercontent.com/img/a/AVvXsEh-KKsOSvE1Gv-mTWhr7rI3MWIIWRdog4C1HCmuC59IbgXPgrojILhtPF5g4QdoxCNMR3bDELWe130p9RvRNIuN9XWt_8_NEmkE6Uq7dPPYGuhLLyZBZ_RnfF7D5AZpiGpLSwgRGzvLEKk76uJjuX1loHa_pkQ3eRWvWp-BQF5-v96xxWgOW0MiedORvsI";
 
   useEffect(() => {
     const connectToStarknet = async () => {
@@ -41,7 +41,7 @@ function Wallet() {
   }, []);
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-[#1F1D29] text-white">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
@@ -50,9 +50,7 @@ function Wallet() {
           <div className="flex space-x-4 lg:flex-1">
             <Link href="/" className="flex space-x-4">
               <img className="h-14 w-auto" src={headerLogoSrc} alt="" />
-              <p className="text-3xl text-blue-700 font-serif pt-2">
-                Auto-stark
-              </p>
+              <p className="text-3xl text-blue-700 pt-2">Auto-stark</p>
             </Link>
           </div>
           <div className="flex lg:hidden">

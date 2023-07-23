@@ -17,7 +17,7 @@ const navigation = [
 ];
 
 const headerLogoSrc =
-  "https://blogger.googleusercontent.com/img/a/AVvXsEhqJsWJhTV71WP49YDJZbVeh_I-btNsep9PfcNylfiPtiVzndyx6ofZlXSpWTFwvAbOklVQWanUJpYcLE6FFLwdXYYdO2E4n4ybolmQhBTJkwpBbjemUplbpKa4sWP1Wxo9WQdtCnEnpWDM0Fa3_ZtAC_FvWh7acbJ0FBmCHG10z9wSMWqzi40GKD3luYE";
+  "https://blogger.googleusercontent.com/img/a/AVvXsEh-KKsOSvE1Gv-mTWhr7rI3MWIIWRdog4C1HCmuC59IbgXPgrojILhtPF5g4QdoxCNMR3bDELWe130p9RvRNIuN9XWt_8_NEmkE6Uq7dPPYGuhLLyZBZ_RnfF7D5AZpiGpLSwgRGzvLEKk76uJjuX1loHa_pkQ3eRWvWp-BQF5-v96xxWgOW0MiedORvsI";
 
 const dashboardTitle = "AutomateChain: Your On-Chain Automation Tool";
 const dashboardSubtitle =
@@ -57,9 +57,7 @@ export default function Navbar() {
           <div className="flex space-x-4 lg:flex-1">
             <Link href="/" className="flex space-x-1">
               <img className="h-14 w-auto" src={headerLogoSrc} alt="" />
-              <p className="text-3xl text-blue-700 font-serif pt-2">
-                Auto-stark
-              </p>
+              <p className="text-3xl text-blue-700 pt-2">Auto-stark</p>
             </Link>
           </div>
           <div className="flex lg:hidden">
@@ -226,9 +224,13 @@ export default function Navbar() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 href={dashboardCTALink}
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="rounded-md flex space-x-1 bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                {dashboardCTAText}
+                <p className="pt-2">{dashboardCTAText}</p>{" "}
+                <img
+                  className="h-8  "
+                  src="https://blogger.googleusercontent.com/img/a/AVvXsEjkMuHboLu1eZb-3M-w6R6bCqmQknGVTtsARbofGhmQiq9n8lz26dJf3lSZSmkvsgzjiN07Ar8FOY1CW4PM5xrQd1qI4HHTIMW5JSb47pog3jZzOwm7hjGBd9eMEsL9nVu0uCD5oJHB9EH_yF5LJ1EHMszY5HHuMMeFwRKtVbBOniqPgweGmnn7aTS6fMg"
+                />
               </Link>
               <Link
                 href={dashboardLearnMoreLink}

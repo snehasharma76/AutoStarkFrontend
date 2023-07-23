@@ -1,6 +1,6 @@
 import { RpcProvider, Contract } from "starknet";
 // https://starknet-goerli.g.alchemy.com/v2/hU1jbwgccRY8mnOWzvECf-C2tuu8Xtrz
-const alchemyKey = "your alchemy key";
+const alchemyKey = "hU1jbwgccRY8mnOWzvECf-C2tuu8Xtrz";
 const providerRPC = new RpcProvider({
   nodeUrl: "https://starknet-goerli.g.alchemy.com/v2/" + alchemyKey,
 });
@@ -24,33 +24,39 @@ const providerRPC = new RpcProvider({
  * Also there is felttosting func which converts felt messages(revert messages) into string.If using argentx they show txn simulation and error msg in felt
  */
 
-export const writeContract = async (account) => {
+export const writeContract = async (
+  account,
+  from,
+  to,
+  amount,
+  window,
+  delay
+) => {
   const deployed_address =
-    "0x04f0f5b6af7a26394cfa1305aa51deb9c95329913732dca830d6a3664ab46f08";
+    "0x06d381bc16bcd39b13bfe20d5501e32a35e981c08ce983dea3a7b791f8b37079";
   const { abi } = await providerRPC.getClassAt(deployed_address);
   const myContract = new Contract(abi, deployed_address, account);
   const userCallData = [
     {
-      from: "0x04B1cd18ABe16a457c4675E453Fa5e43BDB243123eC5d97325d1BDf5365582f8",
-      to: "0x079dFB2ef33323f866C07280F96c4497Ee419D1D0fBB39e2D7cCc63C0F28E819",
+      from: from,
+      to: to,
       selector:
-        "0x1557182e4359a1f0c6301278e8f5b35a776ab58d39892581e357578fb287836",
-      amount: 20,
-      amount_dummy: [
-        "0x079dFB2ef33323f866C07280F96c4497Ee419D1D0fBB39e2D7cCc63C0F28E819",
-      ],
+        "0x0041b033f4a31df8067c24d1e9b550a2ce75fd4a29e1147af9752174f0e6cb20",
+      amount: amount,
+      calldata: [from, changeValue("9")],
     },
   ];
   const contractCallData = [
     userCallData,
-    { window: 1689789951, delay: 100 },
-    20,
+    { window: window, delay: delay },
+    amount,
   ];
   const result = await myContract.invoke("queue", contractCallData, {
     parseRequest: true,
   });
   console.log(result);
 };
+
 const feltToString = (felt) =>
   felt
     // To hex
@@ -62,9 +68,9 @@ const feltToString = (felt) =>
     // Join to a string
     .join("");
 
-export const executeOi = async (account) => {
+export const executeOi = async (account, from, to, amount) => {
   const deployed_address =
-    "0x04f0f5b6af7a26394cfa1305aa51deb9c95329913732dca830d6a3664ab46f08";
+    "0x06d381bc16bcd39b13bfe20d5501e32a35e981c08ce983dea3a7b791f8b37079";
   console.log(
     feltToString("0x496e70757420746f6f2073686f727420666f7220617267756d656e7473")
   );
@@ -72,14 +78,12 @@ export const executeOi = async (account) => {
   const myContract = new Contract(abi, deployed_address, account);
   const userCallData = [
     {
-      from: "0x04B1cd18ABe16a457c4675E453Fa5e43BDB243123eC5d97325d1BDf5365582f8",
-      to: "0x079dFB2ef33323f866C07280F96c4497Ee419D1D0fBB39e2D7cCc63C0F28E819",
+      from: from,
+      to: to,
       selector:
-        "0x1557182e4359a1f0c6301278e8f5b35a776ab58d39892581e357578fb287836",
-      amount: 20,
-      amount_dummy: [
-        "0x079dFB2ef33323f866C07280F96c4497Ee419D1D0fBB39e2D7cCc63C0F28E819",
-      ],
+        "0x0041b033f4a31df8067c24d1e9b550a2ce75fd4a29e1147af9752174f0e6cb20",
+      amount: amount,
+      calldata: [from, changeValue("9")],
     },
   ];
   const contractCallData = [userCallData];
@@ -87,15 +91,13 @@ export const executeOi = async (account) => {
   console.log(result);
 };
 
-export const cancelIt = async (account) => {
+export const cancelIt = async (account, id) => {
   const deployed_address =
-    "0x04f0f5b6af7a26394cfa1305aa51deb9c95329913732dca830d6a3664ab46f08";
+    "0x06d381bc16bcd39b13bfe20d5501e32a35e981c08ce983dea3a7b791f8b37079";
 
   const { abi } = await providerRPC.getClassAt(deployed_address);
   const myContract = new Contract(abi, deployed_address, account);
-  const contractCallData = [
-    "id felt252 you got from the blockexplorer or while calling the writeContract",
-  ];
+  const contractCallData = [id];
   const result = await myContract.invoke("cancel", contractCallData, {
     parseRequest: true,
   });
@@ -103,15 +105,13 @@ export const cancelIt = async (account) => {
   console.log(resp);
 };
 
-export const mintMe = async (account) => {
+export const mintMe = async (account, from) => {
   const deployed_address =
-    "0x04f0f5b6af7a26394cfa1305aa51deb9c95329913732dca830d6a3664ab46f08";
+    "0x06d381bc16bcd39b13bfe20d5501e32a35e981c08ce983dea3a7b791f8b37079";
 
   const { abi } = await providerRPC.getClassAt(deployed_address);
   const myContract = new Contract(abi, deployed_address, account);
-  const contractCallData = [
-    "0x4b1cd18abe16a457c4675e453fa5e43bdb243123ec5d97325d1bdf5365582f8",
-  ];
+  const contractCallData = [from];
   const result = await myContract.invoke("mint_me", contractCallData, {
     parseRequest: true,
   });

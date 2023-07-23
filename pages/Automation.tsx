@@ -33,7 +33,7 @@ function Automation() {
   ];
 
   const headerLogoSrc =
-    "https://blogger.googleusercontent.com/img/a/AVvXsEhqJsWJhTV71WP49YDJZbVeh_I-btNsep9PfcNylfiPtiVzndyx6ofZlXSpWTFwvAbOklVQWanUJpYcLE6FFLwdXYYdO2E4n4ybolmQhBTJkwpBbjemUplbpKa4sWP1Wxo9WQdtCnEnpWDM0Fa3_ZtAC_FvWh7acbJ0FBmCHG10z9wSMWqzi40GKD3luYE";
+    "https://blogger.googleusercontent.com/img/a/AVvXsEh-KKsOSvE1Gv-mTWhr7rI3MWIIWRdog4C1HCmuC59IbgXPgrojILhtPF5g4QdoxCNMR3bDELWe130p9RvRNIuN9XWt_8_NEmkE6Uq7dPPYGuhLLyZBZ_RnfF7D5AZpiGpLSwgRGzvLEKk76uJjuX1loHa_pkQ3eRWvWp-BQF5-v96xxWgOW0MiedORvsI";
 
   useEffect(() => {
     const connectToStarknet = async () => {
@@ -48,25 +48,31 @@ function Automation() {
     };
     connectToStarknet();
   }, []);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [amount, setAmount] = useState("");
+  const [window, setWindow] = useState("");
+  const [delay, setDelay] = useState("");
+  const [id, setId] = useState("");
 
   const handleClick = async (e) => {
     e.preventDefault();
-    await writeContract(account);
+    await writeContract(account, from, to, amount, window, delay);
   };
   const handleBlick = async (e) => {
     e.preventDefault();
-    await executeOi(account);
+    await executeOi(account, from, to, amount);
   };
   const handleFlick = async (e) => {
     e.preventDefault();
-    await cancelIt(account);
+    await cancelIt(account, id);
   };
   const handleMint = async (e) => {
     e.preventDefault();
-    await mintMe(account);
+    await mintMe(account, from);
   };
   return (
-    <div className="bg-black text-white">
+    <div className="bg-[#1F1D29] py-20 text-white">
       <header className="absolute  text-white inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
@@ -75,9 +81,7 @@ function Automation() {
           <div className="flex space-x-4 lg:flex-1">
             <Link href="/" className="flex space-x-4">
               <img className="h-14 w-auto" src={headerLogoSrc} alt="" />
-              <p className="text-3xl text-blue-700 font-serif pt-2">
-                Auto-stark
-              </p>
+              <p className="text-3xl text-blue-700  pt-2">Auto-stark</p>
             </Link>
           </div>
           <div className="flex lg:hidden">
@@ -210,7 +214,7 @@ function Automation() {
           </Dialog.Panel>
         </Dialog>
       </header>
-      <div className="relative isolate px-6  lg:px-8">
+      <div className="relative isolate px-6 py-20 lg:px-8">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-40"
           aria-hidden="true"
@@ -226,30 +230,106 @@ function Automation() {
       </div>
       <div className="flex relative flex-col items-center justify-center h-screen space-y-4">
         <h1 className="text-4xl font-bold">Automation on Starknet</h1>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleClick}
+        <form className="flex flex-col space-y-4" onSubmit={handleClick}>
+          <input
+            type="text"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            placeholder="From"
+          />
+          <input
+            type="text"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            placeholder="To"
+          />
+          <input
+            type="text"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="Amount"
+          />
+          <input
+            type="text"
+            value={window}
+            onChange={(e) => setWindow(e.target.value)}
+            placeholder="Window"
+          />
+          <input
+            type="text"
+            value={delay}
+            onChange={(e) => setDelay(e.target.value)}
+            placeholder="Delay"
+          />
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Write Contract
+          </button>
+        </form>
+
+        <form className="flex flex-col space-y-4" onSubmit={handleBlick}>
+          <input
+            type="text"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            placeholder="From"
+          />
+          <input
+            type="text"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            placeholder="To"
+          />
+          <input
+            type="text"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="Amount"
+          />
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Execute Oi
+          </button>
+        </form>
+
+        {/* Form for handleFlick */}
+        <form className="flex flex-col space-y-4" onSubmit={handleFlick}>
+          <input
+            type="text"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            placeholder="ID"
+          />
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Cancel It
+          </button>
+        </form>
+
+        {/* Form for handleMint */}
+        <form
+          className="flex flex-col space-y-4 bg-[#1F1D29]"
+          onSubmit={handleMint}
         >
-          Click Me
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleBlick}
-        >
-          Execute Me
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleFlick}
-        >
-          Cancel Me
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleMint}
-        >
-          Mint Me
-        </button>
+          <input
+            type="text"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            placeholder="From"
+          />
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Mint Me
+          </button>
+        </form>
       </div>
     </div>
   );
