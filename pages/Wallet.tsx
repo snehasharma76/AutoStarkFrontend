@@ -18,7 +18,7 @@ function Wallet() {
     ConnectedStarknetWindowObject | undefined
   >();
   const navigation = [
-    { name: "Transactions", href: "/Automation" },
+    { name: "Transactions", href: "https://auto-starkk.vercel.app/" },
     { name: "Governance Votes", href: "#" },
     { name: "Wallet", href: "#" },
   ];

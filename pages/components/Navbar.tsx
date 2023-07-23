@@ -11,7 +11,7 @@ import { WalletDetails } from "../../config/WalletDetails";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Transactions", href: "/Automation" },
+  { name: "Transactions", href: "https://auto-starkk.vercel.app/" },
   { name: "Governance Votes", href: "#" },
   { name: "Wallet", href: "/Wallet" },
 ];
@@ -22,7 +22,7 @@ const headerLogoSrc =
 const dashboardTitle = "AutomateChain: Your On-Chain Automation Tool";
 const dashboardSubtitle =
   "Effortlessly Automate Transactions and Governance Votes for Seamless On-Chain Operations.";
-const dashboardCTALink = "/Automation";
+const dashboardCTALink = "https://auto-starkk.vercel.app/";
 const dashboardCTAText = "Get started";
 const dashboardLearnMoreLink = "#";
 const dashboardLearnMoreText = "Learn more →";
